@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
 
-const HomePage = ({ title }) => {
+const HomePage = ({ data }) => {
   return (
     <>
       <header>
@@ -12,21 +13,15 @@ const HomePage = ({ title }) => {
         </nav>
       </header>
       <main>
-        <a href=''>
-          <h1>{title}</h1>
-          <img src="" alt="" />
-          <h2>Event in Goma</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempore alias commodi temporibus molestiae ipsum dolores, excepturi, mollitia amet molestias magnam iusto quibusdam, facere unde voluptatibus. Cum sapiente quaerat omnis.
-          </p>
-        </a>
-        <a href='/events/'>
-          <img src="" alt="" />
-          <h2>Event in Bukavu</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempore alias commodi temporibus molestiae ipsum dolores, excepturi, mollitia amet molestias magnam iusto quibusdam, facere unde voluptatibus. Cum sapiente quaerat omnis.
-          </p>
-        </a>
+        {
+          data.map(event => (
+            <a key={event.id} href={`/events/${event.id}`}>
+              <Image src="/next.svg" alt={event.title} width="100" height="100" />
+              <h2>{event.title}</h2>
+              <p>{event.description}</p>
+            </a>
+          ))
+        }
       </main>
       <footer>
         <p>&copy; {new Date().getFullYear()} Event</p>
@@ -35,10 +30,12 @@ const HomePage = ({ title }) => {
   )
 }
 
-export const getServerSideProps = () => {
+export const getServerSideProps = async () => {
+  const { events_categories } = await import('/data/data.json');
+  
   return {
     props: {
-      title: "Bonjour Tariq"
+      data: events_categories
     }
   }
 }
