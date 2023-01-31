@@ -1,18 +1,18 @@
 const Page = () => {
   return (
     <div>
-      Events by city
+      Events In Goma
       <div>
-        <a href="/event/goma">Event in Goma</a>
+        <a href="events/goma/1201">Event 1</a>
       </div>
       <div>
-        <a href="/event/bukavu">Event in Bukavu</a>
+        <a href="events/bukavu/1201">Event 2</a>
       </div>
       <div>
-        <a href="/event/lubumbashi">Event in Lubumbashi</a>
+        <a href="events/lubumbashi/1201">Event 3</a>
       </div>
       <div>
-        <a href="/event/kinshasa">Event in Kinshasa</a>
+        <a href="events/kinshasa1201">Event 4</a>
       </div>
     </div>
   )
