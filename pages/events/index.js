@@ -1,23 +1,31 @@
-const EventsPage = () => {
+import Image from 'next/image';
+
+const EventsPage = ({ data }) => {
   return (
     <>
+      <strong>Events Page</strong>
       <div>
-        All Events
-        <div>
-          <a href="events/goma">Event in Goma</a>
-        </div>
-        <div>
-          <a href="events/bukavu">Event in Bukavu</a>
-        </div>
-        <div>
-          <a href="events/lubumbashi">Event in Lubumbashi</a>
-        </div>
-        <div>
-          <a href="events/kinshasa">Event in Kinshasa</a>
-        </div>
+        {
+          data.map(event => (
+            <a key={event.id} href={`/events/${event.id}`}>
+              <h2>{event.title}</h2>
+              <Image src={event.image} alt={event.title} width={200} height={200} />
+            </a>
+          ))
+        }
       </div>
     </>
   )
+}
+
+export const getStaticProps = async () => {
+  const { events_categories } = await import('/data/data.json');
+
+  return {
+    props: {
+      data: events_categories
+    }
+  }
 }
 
 export default EventsPage

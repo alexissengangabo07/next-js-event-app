@@ -16,7 +16,7 @@ const HomePage = ({ data }) => {
         {
           data.map(event => (
             <a key={event.id} href={`/events/${event.id}`}>
-              <Image src="/next.svg" alt={event.title} width="100" height="100" />
+              <Image src={event.image} alt={event.title} width="300" height="300" />
               <h2>{event.title}</h2>
               <p>{event.description}</p>
             </a>
@@ -32,7 +32,7 @@ const HomePage = ({ data }) => {
 
 export const getServerSideProps = async () => {
   const { events_categories } = await import('/data/data.json');
-  
+
   return {
     props: {
       data: events_categories
