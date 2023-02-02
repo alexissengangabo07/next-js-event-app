@@ -7,7 +7,7 @@ const EventsByCategoriePage = ({ data }) => {
       <div>
         {
           data.map(event => (
-            <a href={`/event/${event.city}/${event.id}`} key={event.id}>
+            <a href={`/events/${event.city}/${event.id}`} key={event.id}>
               <h2>{event.title}</h2>
               <Image src={event.image} width="350" height="300" alt={event.title} />
               <p>
@@ -29,7 +29,7 @@ export const getStaticPaths = async () => {
   const allPaths = events_categories.map(event => {
     return {
       params: {
-        categorie: event.id
+        town: event.id
       }
     }
   })
@@ -41,7 +41,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-  const id = context.params.categorie;
+  const id = context.params.town;
   const { allEvents } = await import('/data/data.json');
 
   const data = allEvents.filter(ev => ev.city === id);
