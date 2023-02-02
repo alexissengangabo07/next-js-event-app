@@ -1,8 +1,13 @@
+import { Suspense } from 'react'
 import Image from 'next/image'
+import Head from 'next/head'
 
 const EventPerCityPage = ({ data }) => {
     return (
         <>
+            <Head>
+                <title>{data.title}</title>
+            </Head>
             <h2>{data.title}</h2>
             <Image src={data.image} width={500} height={430} alt={data.title} />
             <p>

@@ -1,23 +1,36 @@
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import Head from 'next/head';
 
 const EventsByCategoriePage = ({ data }) => {
+  // const [city, setCity] = useState('');
+  // useEffect(() => {
+  //   setCity(data[0].city);
+  // }, [data]);
+
   return (
-    <div>
-      Events In Goma
+    <>
+      <Head>
+        <title>Events in {data[0].city}</title>
+      </Head>
       <div>
-        {
-          data.map(event => (
-            <a href={`/events/${event.city}/${event.id}`} key={event.id}>
-              <h2>{event.title}</h2>
-              <Image src={event.image} width="350" height="300" alt={event.title} />
-              <p>
-                {event.description}
-              </p>
-            </a>
-          ))
-        }
+        Events in {data[0].city}
+        <div>
+          {
+            data.map(event => (
+              <Link href={`/events/${event.city}/${event.id}`} key={event.id}>
+                <h2>{event.title}</h2>
+                <Image src={event.image} width="350" height="300" alt={event.title} />
+                <p>
+                  {event.description}
+                </p>
+              </Link>
+            ))
+          }
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
